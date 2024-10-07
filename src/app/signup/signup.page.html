@@ -1,0 +1,92 @@
+<ion-header >
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button  size="large" (click)="backtologin()"><ion-icon name="chevron-back-outline" size-="large" class="margin-icon"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>{{ 'SIGNUP' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid >
+    <ion-row align-items-center>
+      <ion-col no-padding col-12 col-sm-12 col-md-12 col-lg-12 offset-xl-2 col-xl-8>
+        <form padding-horizontal >
+          <!---Input field firstname-->
+          <ion-item transparent class="ion-margin-vertical">
+              <ion-label stacked>{{ 'FIRSTNAME' | translate }}</ion-label>
+              <ion-input required placeholder="{{ 'FIRSTNAME' | translate }}" type="text" required [(ngModel)]="account.firstname" name="firstname"></ion-input>
+              <ion-label error-field no-margin *ngIf="!isFirstnameValid" class="validator-error">{{ mandatory }}</ion-label>
+            </ion-item>
+          <!---Input field lastname-->
+          <ion-item transparent class="ion-margin-vertical">
+              <ion-label stacked>{{ 'LASTNAME' | translate }}</ion-label>
+              <ion-input required placeholder="{{ 'LASTNAME' | translate }}" type="text"  required [(ngModel)]="account.lastname" name="lastname"></ion-input>
+              <ion-label error-field no-margin *ngIf="!isLastnameValid" class="validator-error">{{ mandatory }}</ion-label>
+            </ion-item>
+          <!---Input field email-->
+          <ion-item transparent class="ion-margin-vertical">
+              <ion-label stacked>{{ 'EMAIL' | translate }}</ion-label>
+              <ion-input required placeholder="{{ 'EMAIL' | translate }}" type="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" name="email" required [(ngModel)]="account.email" [ngModelOptions]="{standalone: true}"></ion-input>
+              <ion-label error-field no-margin *ngIf="!isEmailValid" class="validator-error">{{ errorEmail }}</ion-label>
+            </ion-item>
+          <!---Input field username-->
+          <ion-item transparent class="ion-margin-vertical">
+            <ion-label stacked>{{ 'USERNAME' | translate }}</ion-label>
+            <ion-input required placeholder="{{ 'USERNAME' | translate }}" type="text" [(ngModel)]="account.username" name="username" [ngModelOptions]="{standalone: true}"></ion-input>
+            <ion-label error-field no-margin *ngIf="!isUsernameValid" class="validator-error">{{ errorUsername }}</ion-label>
+          </ion-item>
+          <!---Input field password-->
+          <ion-item transparent class="ion-margin-vertical">
+            <ion-label stacked>{{ 'PASSWORD' | translate }}</ion-label>
+            <ion-input required placeholder="{{ 'PASSWORD' | translate }}" type="password" [(ngModel)]="account.password" name="password" [ngModelOptions]="{standalone: true}"></ion-input>
+            <ion-label error-field no-margin *ngIf="!isPasswordValid" class="validator-error">{{ mandatory }}</ion-label>
+          </ion-item>
+          <!---Input field phone-->
+          <ion-item transparent class="ion-margin-vertical">
+            <ion-label stacked>{{ 'PHONE' | translate }}</ion-label>
+            <ion-input required type="number"  required [(ngModel)]="account.phone" name="phone"></ion-input>
+            <ion-label error-field no-margin *ngIf="!isPhoneValid" class="validator-error">{{ mandatory }}</ion-label>
+          </ion-item>
+          <!---Input field birthday-->
+          <ion-item transparent class="ion-margin-vertical">
+            <ion-label >{{ 'BIRTHDAY' | translate }}</ion-label>
+          </ion-item>
+          <ion-item transparent class="ion-margin-vertical">
+            <ion-datetime required  presentation="date" [preferWheel]="true" [(ngModel)]="account.birthday" name="birthday"></ion-datetime>
+            <ion-label error-field no-margin *ngIf="!isBirthdayValid" class="validator-error">{{ mandatory }}</ion-label>
+          </ion-item>
+          <!---Input field country-->
+          <ion-item transparent  lines="none">
+            <ion-label stacked>{{ 'ADRESS' | translate }}</ion-label>
+            <ion-input required placeholder="{{ 'ADRESS' | translate }}" type="text" required [(ngModel)]="account.adress" name="adress" ></ion-input>
+            <ion-label error-field no-margin *ngIf="!isAdressValid" class="validator-error">{{ mandatory }}</ion-label>
+          </ion-item>
+          <!---Input field city-->
+          <ion-item transparent  lines="no" class="ion-margin-vertical">
+            <ion-input required placeholder="{{ 'CITY' | translate }}" type="text"  required [(ngModel)]="account.city" name="city" ></ion-input>
+            <ion-input required placeholder="{{ 'ZIPCODE' | translate }}" type="text"  required [(ngModel)]="account.zipcode" name="zipcode" ></ion-input>
+          </ion-item>
+          <ion-item transparent lines="none" class="ion-margin-vertical">
+            <ion-label>{{ 'REGULAREVENTS' | translate }}</ion-label>
+            <ion-checkbox  checked="true" [(ngModel)]="account.is_regular" name="is_regular" ></ion-checkbox>
+          </ion-item>
+        
+          <ion-item transparent  lines="none" class="ion-margin-vertical">
+            <ion-label>{{ 'SPECIALEVENTS' | translate }}</ion-label>
+            <ion-checkbox  checked="true" [(ngModel)]="account.is_special_event" name="is_special_event" ></ion-checkbox>
+          </ion-item>
+        
+          <ion-item transparent  lines="none" class="ion-margin-vertical">
+            <ion-label>{{ 'SENIOREVENTS' | translate }}</ion-label>
+            <ion-checkbox checked="true" [(ngModel)]="account.is_senior_service" name="is_senior_service" ></ion-checkbox>
+          </ion-item>
+          <!---Register button-->
+          <div class="ion-text-center ion-margin-bottom">
+            <ion-button ion-button color="primary" (click)="doSignup()">{{ 'SIGNUP_BUTTON' | translate }}</ion-button>
+          </div>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

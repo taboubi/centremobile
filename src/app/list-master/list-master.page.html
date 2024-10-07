@@ -1,0 +1,128 @@
+<ion-header >
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button *ngIf="home"></ion-menu-button>
+      <ion-button *ngIf="!home"  size="large" (click)="backtointerests()"><ion-icon name="chevron-back-outline" size-="large" class="margin-icon"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>{{ 'EVENTS' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header >
+  </ion-header>
+  <div id="container">
+    <ion-grid no-padding *ngIf="home">
+      <ion-row>
+        <ion-card *ngIf="regular" (click)="openType(1)" class="mastercard">
+          <img alt="Silhouette of mountains" src="../assets/images/background/partenaires.jpg" />
+          <ion-card-header class="cardheader">
+            <ion-card-title class="eventtitle">{{'REGULAREVENTS' | translate}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+        <ion-card *ngIf="senior" (click)="openType(2)"  class="mastercard">
+          <img alt="Silhouette of mountains" src="../assets/images/background/services-aines.jpg" />
+          <ion-card-header class="cardheader">
+            <ion-card-title class="eventtitle">{{ 'SENIOREVENTS' | translate }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+        <ion-card *ngIf="special"  (click)="openType(3)"  class="mastercard">
+          <img alt="Silhouette of mountains" src="../assets/images/background/devenir-benevole.jpg" />
+          <ion-card-header class="cardheader">
+            <ion-card-title class="eventtitle">{{ 'SPECIALEVENTS' | translate }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-row>
+   </ion-grid>
+   <ion-grid no-padding *ngIf="!home">
+      <ion-row class="ios-category-event" *ngIf="hascategories">
+        <ion-col col-6 class="slectcontainer">
+          <ion-select  placeholder="{{ 'CHOOSECATEGORY' | translate  }}" [(ngModel)]="category" (ionChange)="changeCategory()">
+              <ion-select-option value="0">{{ 'ALLCATEGORIES' | translate  }}</ion-select-option>
+            <ion-select-option *ngFor="let category of categories" [value]="category.id">{{category.title}}</ion-select-option>
+         </ion-select>
+        </ion-col>
+        <ion-col col-6>
+      
+          <ion-buttons [collapse]="true" class="buttonsreload">
+            <ion-button *ngIf="!home" class="reloadbutton" (click)="loadItems()" ><ion-icon size="large" name="sync" color="primary" class="margin-icon"></ion-icon></ion-button>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+      <ion-row align-items-center *ngIf="emptyevents === true">
+          <ion-col no-padding col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
+              <h5 class="ion-text-center" ion-text text-center color="light">{{ 'UNVAILABLEEVENT' | translate }}</h5>
+          </ion-col>
+      </ion-row>
+      <ion-row *ngIf="currentItems !== null">
+        <div *ngFor="let item of currentItems">
+          <ion-card text-left box-shadow class="cardevent">
+            <!--Card descriptiom-->
+            <ion-card-header>
+              <h1 card-subtitle>{{item['title']}}</h1>
+            </ion-card-header>
+            <ion-card-content>
+                <!--Card Body Text-->
+                <p card-body-text>{{item['description'] | truncate : 200 : "..."}}</p>
+            </ion-card-content>
+            <ion-row>
+              <ion-col class="col" col-6>
+                  <span item-start span-medium><ion-icon name="people" color='primary' class="margin-icon" item-start></ion-icon>{{ 'SUBSCRIPTIONS' | translate }}</span>
+                  <span item-end span-medium small>({{item['subscribers']}}/{{item['limit_subscribe']}})</span>
+              </ion-col>
+              <ion-col class="col" col-6>
+                <span *ngIf="item['subscribers'] == item['limit_subscribe']" class="stamp is-nope">{{ 'FULL' | translate }}</span>
+             </ion-col>
+              
+            </ion-row>
+            <ion-row *ngIf="item['dates']['length'] > 0" >
+                <ion-col col-12>
+                   <ion-icon name="calendar" color="primary" class="margin-icon"></ion-icon> {{ 'DATE_TIME' | translate }} 
+                   <ion-icon class="margin-icon" name="remove-circle-outline" color="primary"  *ngIf="isItemShown(item['id']) === true" (click)="toggleItem(item['id'])"></ion-icon>
+                   <ion-icon class="margin-icon" name="add-circle-outline" color="primary" *ngIf="isItemShown(item['id']) === false" (click)="toggleItem(item['id'])"></ion-icon>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col  *ngIf="isItemShown(item['id']) === true">
+                  <ion-row align-items-center   *ngFor="let date of item['dates']" >
+                              <span class="date-event"> 
+                                <ion-icon name="time"></ion-icon>{{ date.start_date | prettydate }}
+                              </span>
+                              <ion-icon name="arrow-forward"></ion-icon>
+                              <span class="date-event"> 
+                              {{ date.end_date | prettydate }}
+                            </span>
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+            <ion-grid>
+            <ion-row class="ion-justify-content-between ion-align-items-center">
+              <ion-col class="display-flex" size="auto" color="primary">
+                  <ion-icon name="pricetags" class="margin-icon" color="primary"></ion-icon>
+                  <span *ngIf="item['typeid'] === 1" class="badge-custom success-badge" >{{ item['type'] }}</span>
+                  <span *ngIf="item['typeid'] === 2" class="badge-custom blue-light-badge">{{ item['type'] }}</span>
+                  <span *ngIf="item['typeid'] === 3" class="badge-custom dark-badge">{{ item['type'] }}</span>
+              </ion-col>
+             <ion-col size="auto" class="ion-text-end ion-float-left"  *ngIf="item['can_subscribe'] === true && item['subscribe_status'] === false" ><ion-button (click)="openItem(item)" ion-button size="small" color="secondary"   item-end icon-start small float-right>
+              {{ 'MOREDETAIL' | translate }}</ion-button></ion-col>
+             <ion-col *ngIf="item['subscribe_status'] !== false" size="auto" class="display-flex">
+                <span *ngIf="item['subscribe_status'] === '0'" class="badge-custom danger-badge display-flex"><ion-icon name="close-circle"></ion-icon>{{  'STATUS_REFUSED' | translate }}</span>
+                <span *ngIf="item['subscribe_status'] === '2'" class="badge-custom success-badge display-flex"><ion-icon name="checkmark-circle" color="secondary"></ion-icon>{{  'STATUS_APPROVED' | translate }}</span>
+                <span *ngIf="item['subscribe_status'] === '1'" class="badge-custom waiting-badge display-flex"><ion-icon name="ios-timer-outline"></ion-icon>{{  'STATUS_WAITING' | translate }}</span>
+                
+             </ion-col>
+             <ion-col  size="auto" *ngIf="item['subscribe_status'] !== false">
+              <ion-buttons [collapse]="true" class="buttonsreload">
+                <ion-button  color="primary" *ngIf="item['can_modify'] === true" (click)="openItem(item)" ><ion-icon name="create" color="primary" size="large"  class="margin-icon"></ion-icon> {{  'MODIFY' | translate }}</ion-button>
+                <ion-button color="primary" *ngIf="item['can_modify'] === false" (click)="openItem(item)" class="ion-margin-vertical"><ion-icon size="large" name="chevron-forward-circle-outline" color="primary" class="margin-icon"></ion-icon> {{  'SHOWEVENT' | translate }}</ion-button>
+              </ion-buttons>
+             </ion-col>
+            </ion-row>
+            </ion-grid>
+          </ion-card>
+        </div>
+      </ion-row>
+    </ion-grid>
+  </div>
+  
+</ion-content>

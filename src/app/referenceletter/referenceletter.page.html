@@ -1,0 +1,48 @@
+<ion-header >
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ 'REFERENCELETTER' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header >
+  </ion-header>
+  <div id="container">
+   <ion-grid no-padding >
+      <ion-row *ngIf="currentItems !== null">
+        <div *ngFor="let item of currentItems">
+          <ion-card text-left box-shadow class="cardevent">
+            <!--Card descriptiom-->
+            
+            <ion-card-content>
+              <ion-card-title>
+                <!--Card Subtitle-->
+                <h1 card-subtitle >{{ 'LETTER_REFERENCE_REQUEST' | translate }}</h1>
+              </ion-card-title>
+            </ion-card-content>
+
+            <ion-row>
+                <ion-col col-12>
+                   <ion-icon name="calendar" color="primary" class="margin-icon"></ion-icon> {{ 'CREATED_AT' | translate }} : {{ item['created_at'] | prettydate }} 
+                </ion-col>
+            </ion-row>
+            <ion-row>
+               <ion-col  col-12 >
+                  <span *ngIf="item['processed'] == 1" class="badge-custom success-badge display-flex" float-right><ion-icon name="checkmark-circle" color="secondary"></ion-icon>{{ 'PROCESSED' | translate }}</span>
+                  <span *ngIf="item['processed'] == 0" class="badge-custom waiting-badge display-flex" float-right><ion-icon name="ios-timer-outline"></ion-icon>{{ 'WAITING_FOR_PROCESS' | translate }}</span>
+               </ion-col>
+            </ion-row>
+          </ion-card>
+        </div>
+      </ion-row>
+      <ion-row class="ion-justify-content-center ion-margin-vertical">
+
+          <ion-button (click)="sendRequest()" ion-button color="success" size="small">{{ 'SEND_NEW_REQUEST' | translate }}</ion-button>
+
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

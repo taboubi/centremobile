@@ -1,0 +1,107 @@
+<ion-header >
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button *ngIf="page === 'main'"></ion-menu-button>
+      <ion-button *ngIf="page !== 'main'" size="large" (click)="backtosettings()"><ion-icon name="chevron-back-outline" size-="large" class="margin-icon"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>{{ 'SETTINGS_TITLE' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid >
+    <ion-row align-items-center>
+    <ion-col>
+    <form >
+      <ion-list *ngIf="page === 'main'">
+        <ion-item>
+          <ion-label>{{ 'SETTINGS_LANGUAGE' | translate }}</ion-label>
+          <ion-select name="lang" [(ngModel)]="lang" (ionChange)="changeLanguage()" placeholder="{{language}}">
+            <ion-select-option value="en">English</ion-select-option>
+            <ion-select-option value="fr">Français</ion-select-option>
+        </ion-select>
+        </ion-item>
+        
+        <ion-item>
+          <ion-buttons >
+          <ion-button color="primary" (click)="displaypage('profile')">
+            {{ 'EDIT_PROFILE' | translate }}
+          </ion-button>
+        </ion-buttons>
+        </ion-item>
+        <ion-item>
+          <ion-buttons >
+          <ion-button  color="primary"  (click)="displaypage('password')">
+              {{ 'UPDATEPASSWORD' | translate }}
+          </ion-button>
+        </ion-buttons>
+        </ion-item>
+      </ion-list>
+    </form>
+    </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid >
+  <ion-row align-items-center>
+  <form  *ngIf="page === 'profile'" >
+     <!---Input field firstname-->
+     <ion-item transparent>
+        <ion-label color="primary">{{ 'FIRSTNAME' | translate }}</ion-label>
+        <ion-input required placeholder="{{ 'FIRSTNAME' | translate }}" type="text" required [(ngModel)]="account.firstname" name="firstname"></ion-input>
+
+      </ion-item>
+    <!---Input field lastname-->
+    <ion-item transparent>
+        <ion-label color="primary">{{ 'LASTNAME' | translate }}</ion-label>
+        <ion-input required placeholder="{{ 'LASTNAME' | translate }}" type="text"  required [(ngModel)]="account.lastname" name="lastname"></ion-input>
+
+      </ion-item>
+    <!---Input field email-->
+    <ion-item transparent>
+        <ion-label color="primary">{{ 'EMAIL' | translate }}</ion-label>
+        <ion-input required placeholder="{{ 'EMAIL' | translate }}" type="email"  name="email" required [(ngModel)]="account.email" [ngModelOptions]="{standalone: true}"></ion-input>
+
+      </ion-item>
+    <!---Input field phone-->
+    <ion-item transparent>
+      <ion-label color="primary">{{ 'PHONE' | translate }}</ion-label>
+      <ion-input required type="number"  required [(ngModel)]="account.phone" name="phone"></ion-input>
+    </ion-item>
+    <!---Input field birthday-->
+    <ion-item transparent>
+      <ion-label color="primary">{{ 'BIRTHDAY' | translate }}</ion-label>
+    </ion-item>
+    <ion-item transparent>
+      <ion-datetime *ngIf="account.birthday" required presentation="date" [preferWheel]="true"  [(ngModel)]="account.birthday" name="birthday"></ion-datetime>
+    </ion-item>
+    <!---Input field country-->
+    <ion-item transparent>
+      <ion-label color="primary">{{ 'ADRESS' | translate }}</ion-label>
+      <ion-input required placeholder="{{ 'ADRESS' | translate }}" type="text" required [(ngModel)]="account.adress" name="adress" ></ion-input>
+    </ion-item>
+    <!---Input field city-->
+    <ion-item transparent>
+      <ion-input required placeholder="{{ 'CITY' | translate }}" type="text"  required [(ngModel)]="account.city" name="city" ></ion-input>
+      <ion-input required placeholder="{{ 'ZIPCODE' | translate }}" type="text"  required [(ngModel)]="account.zipcode" name="zipcode" ></ion-input>
+    </ion-item>
+    <!---Register button-->
+    <div padding class="ion-text-center ion-margin-vertical">
+      <ion-button ion-button color="success" (click)="updateProfile()">{{ 'SAVE' | translate }}</ion-button>
+    </div>
+  </form>
+
+  <form  *ngIf="page === 'password'">
+
+          <ion-item>
+              <ion-label stacked>{{ 'PASSWORD' | translate }}</ion-label>
+              <ion-input required placeholder="{{ 'PASSWORD' | translate }}" type="password" [(ngModel)]="password" name="password" [ngModelOptions]="{standalone: true}"></ion-input>
+          </ion-item>
+
+        <div padding class="ion-text-center ion-margin-vertical">
+            <ion-button ion-button color="success" block (click)="updatePassword()">{{ 'SAVE' | translate }}</ion-button>
+          </div>
+  </form>
+
+</ion-row>
+</ion-grid>
+</ion-content>

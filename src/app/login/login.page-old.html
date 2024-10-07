@@ -1,0 +1,60 @@
+<ion-header>
+
+  <ion-toolbar>
+    <ion-title>
+        <div class="title-elements">
+            {{ 'LOGIN_TITLE' | translate }}
+        </div>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="changeLanguage()">
+        <ion-icon name="earth-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+<ion-content  background-size [ngStyle]="{'background-image': 'url(../../assets/images/background/39.jpg)'}" [ngClass]="login-content">
+  
+  <ion-grid >
+    <ion-row align-items-center>
+      <ion-col no-padding col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
+          <div description text-right padding-horizontal>
+              <p> <a class="forgot"  (click)="forgotpassword()">{{'FORGOTTEN_PASSWORD' | translate}}</a></p>
+            </div>
+        <ion-item transparent no-lines no-padding margin-top>
+          <!---Logo-->
+          <img box-shadow item-start margin src="assets/images/logo/1.png" class="login-logo">
+          <!---Logo Subtitle-->
+          <h2 login-subtitle>Faire bouger la communauté!</h2>
+          <!---Logo Title-->
+          <h1 ion-text login-title no-margin text-wrap>Simple comme l'ABC!</h1>
+        </ion-item>
+        <!---Form-->
+        <form padding-horizontal (submit)="doLogin()" >
+          <!---Input field username-->
+          <ion-item margin-top transparent>
+            <ion-label stacked>{{ 'Email' | translate }}</ion-label>
+            <ion-input required type="text" placeholder="{{ 'Email' | translate }}" [(ngModel)]="account.username" name="username" [ngModelOptions]="{standalone: true}"></ion-input>
+            <ion-label error-field no-margin  *ngIf="!isUsernameValid">{{'REQUIRED_FIELD' | translate}}</ion-label>
+          </ion-item>
+          <!---Input field password-->
+          <ion-item transparent>
+            <ion-label stacked>{{ 'PASSWORD' | translate }}</ion-label>
+            <ion-input required type="password" placeholder="{{ 'PASSWORD' | translate }}" [(ngModel)]="account.password" name="password" [ngModelOptions]="{standalone: true}"></ion-input>
+            <ion-label error-field no-margin *ngIf="!isPasswordValid">{{'REQUIRED_FIELD' | translate}}</ion-label>
+          </ion-item>
+          <!---Login button-->
+          <button ion-button default-button full text-uppercase box-shadow >{{ 'LOGIN_BUTTON' | translate }}</button>
+        </form>
+          <!-- Button Register Now-->
+
+          <div description text-center padding-horizontal>
+            <p>{{ 'NOACCOUNT' | translate }}</p>
+            <button ion-button full color="light" outline text-uppercase (click)="register()">{{ 'SIGNUP' | translate }}</button>
+          </div>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

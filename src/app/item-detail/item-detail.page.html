@@ -1,0 +1,166 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button *ngIf="source === 'notif'"></ion-menu-button>
+      <ion-button *ngIf="source !== 'notif'" size="large" (click)="backtoevents()"><ion-icon name="chevron-back-outline" size-="large" class="margin-icon"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title  *ngIf="item !== null && showmonths === false">{{ item.title }}</ion-title>
+    <ion-title class="noback" *ngIf="item != null && showmonths === true">{{ item.title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding *ngIf="showmonths" [class.margin-detail]="classloading">
+  <h4 class="nbhours">{{ 'NBHOURSPERMONTH' | translate }}</h4>
+  <ion-row >
+    <ion-list class="months">
+    <ion-item lines *ngFor="let month of item.months; let i = index;">
+      <ion-label color="primary">{{ month.label }}</ion-label>
+      <ion-input placeholder="0" [(ngModel)]="item.months[i].nb" ></ion-input>
+    </ion-item>
+    </ion-list>
+  </ion-row>
+  <ion-row class="ion-justify-content-center ion-margin-vertical">
+    <ion-button ion-button size="small" color="primary" (click)="savehourspermonth()" >{{ 'SAVE' | translate }}</ion-button>
+    <ion-button ion-button size="small" color="dark" (click)="cancel()" >{{ 'CANCEL_BUTTON' | translate }}</ion-button>
+  </ion-row>
+</ion-content>
+<ion-content padding *ngIf="item != null && showmonths === false" [class.margin-detail]="classloading">
+<ion-grid >
+    <ion-row align-items-center>
+    <ion-col no-padding col-12 col-sm-12 col-md-12 col-lg-12 offset-xl-2 col-xl-8>
+    <ion-list>
+    <h3 class="example-h3">{{ item.title }}</h3>
+    <p class="pre">{{ item.description }}</p>
+    <h6 class="pre"><ion-icon name="information-circle" *ngIf="item.other_informations != null" ></ion-icon> {{ item.other_informations }}</h6>
+    <div class="title-components" text-center></div>
+    <ion-row>
+        <ion-col class="col">
+            <span item-start span-medium><ion-icon name="people"  class="margin-icon" color='primary' item-start></ion-icon>{{ 'SUBSCRIPTIONS' | translate }}</span>
+            <span item-end span-medium small>({{item.subscribers}}/{{item.limit_subscribe}})</span>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="item.subscribe_status == 2">
+          <ion-col class="col">
+              <span span-medium ><ion-icon  class="margin-icon" name="pin" color='primary'></ion-icon>{{item.adress}}</span>
+          </ion-col>
+      </ion-row>
+      <ion-row *ngIf="item.subscribe_status == 2">
+          <ion-col class="col">
+              <span span-medium ><ion-icon  class="margin-icon"name="person" color='primary'></ion-icon>{{item.fullname_responsible}}</span>
+          </ion-col>
+      </ion-row>
+      <ion-row *ngIf="item.subscribe_status == 2">
+          <ion-col class="col">
+              <span span-medium ><ion-icon  class="margin-icon" name="mail" color='primary'></ion-icon>{{item.email}}</span>
+          </ion-col>
+      </ion-row>
+      <ion-row *ngIf="item.subscribe_status == 2">
+          <ion-col class="col">
+              <span span-medium ><ion-icon  class="margin-icon" name="phone-portrait-outline" color='primary'></ion-icon>{{item.phone_responsible}} : {{item.phone_post_responsible}}</span>
+          </ion-col>
+      </ion-row>
+      <ion-row *ngIf="item.dates.length > 0" >
+          <ion-col col-12>
+             <ion-icon name="calendar"  class="margin-icon" color="primary"></ion-icon> {{ 'DATE_TIME' | translate }} 
+          </ion-col>
+          <div class="col" col-12>
+            <ion-row class="ion-justify-content-between"  *ngFor="let date of item.dates" >
+                    <ion-col size="auto">
+                        <span class="date-event"> 
+                          <ion-icon name="time"></ion-icon>{{ date.start_date | prettydate }}
+                        </span>
+                    </ion-col>
+                    <ion-col size="auto">
+                        <ion-icon name="arrow-forward"></ion-icon>
+                    </ion-col>
+                    <ion-col size="auto">
+                        <span class="date-event"> 
+                        {{ date.end_date | prettydate }}
+                      </span>
+                    </ion-col>
+            </ion-row>
+          </div>
+      </ion-row>
+      <ion-row>
+        <ion-col col-8>
+            <ion-icon name="pricetags"  class="margin-icon" color="primary"></ion-icon>
+            <span *ngIf="item.typeid == 1" class="badge-custom success-badge">{{ item.type }}</span>
+            <span *ngIf="item.typeid == 2" class="badge-custom blue-light-badge">{{ item.type }}</span>
+            <span *ngIf="item.typeid == 3" class="badge-custom dark-badge">{{ item.type }}</span>
+        </ion-col>
+      </ion-row>
+      <ion-grid no-padding>
+            <form padding-horizontal (submit)="sendHours()" *ngIf="item.can_enter_hours !== false && item.typeid !== 1 && item.typeid !== 2">
+                    <ion-row class="title-components">{{ 'NBHOURS' | translate }}
+                    </ion-row>
+                    <!-- List Section -->
+                    <ion-list>
+                    <ion-item>
+                            <ion-input placeholder="{{ 'NBHOURS_PLACEHOLDER' | translate }}"  type="text"  [(ngModel)]="nb_hours" name="nb_hours"></ion-input>
+                    </ion-item>
+                    <ion-item  >
+                            <ion-button ion-button size="small" color="secondary">{{ 'SAVE' | translate }}</ion-button>
+                    </ion-item>
+                </ion-list>
+            </form>
+            <div *ngIf="(item.typeid == 1 || item.typeid == 2) && item.subscribe_status == 2">
+                <ion-row class="title-components">{{ 'NBHOURS' | translate }}
+                </ion-row>
+                <ion-row class="col">
+                    <span span-medium ><ion-icon class="margin-icon" name="time" color='primary'></ion-icon>{{ 'TOTALNBHOURS' | translate }} : <span class="nbhourstotal">{{item.nb_hours}}</span></span>
+                </ion-row>
+                <ion-row  >
+                    <ion-button class="ion-margin-vertical ion-margin-start" ion-button size="small" color="secondary" (click)="showMonths()" >{{ 'ENTERPERMONTH' | translate }}</ion-button>
+                </ion-row>
+              </div>
+          <form >
+          <div class="title-components">{{ 'SUBSCRIPTION' | translate }}
+              <span *ngIf="item.subscribe_status == 0 && item.subscribe_status !== false" class="badge-custom danger-badge display-flex subscribe-badge"><ion-icon name="close-circle"></ion-icon>{{  'STATUS_REFUSED' | translate }}</span>
+              <span *ngIf="item.subscribe_status == 2" class="badge-custom success-badge display-flex subscribe-badge"><ion-icon name="checkmark-circle" color="secondary"></ion-icon>{{  'STATUS_APPROVED' | translate }}</span>
+              <span *ngIf="item.subscribe_status == 1" class="badge-custom waiting-badge display-flex subscribe-badge"><ion-icon name="ios-timer-outline"></ion-icon>{{  'STATUS_WAITING' | translate }}</span>
+
+          </div>
+          <!-- List Section -->
+          <ion-grid no-lines *ngIf="isDisabled() == false" >
+            <ion-row class="item-period borderrow" lines *ngFor="let date of periods">
+              <!-- Toggle -->
+              <ion-checkbox color="secondary" disabled="{{ date.disabled }}" item-start (ionChange)="togglePeriod(date.id_period)" checked="{{ date.subscribed }}"></ion-checkbox>
+              <!-- Item-subtitle -->
+              <ion-label class="label-subtitle" item-subtitle>{{ date.label }}</ion-label>
+              <!-- Item-title -->
+              <ion-label item-title class="labelperiod">{{ date.start_date | prettydate }} <ion-icon name="arrow-forward"></ion-icon> {{ date.end_date | prettydate }}</ion-label>
+              <ion-label item-title class="labelperiod ion-text-wrap">
+
+                  <span *ngIf="date.limit_subscribe" class="sub-period" item-start span-medium><ion-icon name="people"  class="margin-icon" color='primary' item-start></ion-icon>{{ 'SUBSCRIPTIONS' | translate }}</span>
+                  <span *ngIf="date.limit_subscribe" class="sub-period" item-end span-medium small>({{date.subscribers}}/{{date.limit_subscribe}})</span>
+                  <span *ngIf="date.subscribers == date.limit_subscribe" class="sub-period period-full">{{ 'FULL' | translate }}</span>
+              </ion-label>
+            </ion-row>
+            <ion-row  class="ion-justify-content-center ion-margin-vertical" *ngIf="item.subscribe_status === false">
+              <ion-button  color="success"   [disabled]="isDisabled()" (click)="sendSubscription()" >{{ 'SUBSCRIBE' | translate }}</ion-button>
+            </ion-row>
+            <ion-row  *ngIf="item.subscribe_status !== false">
+              <ion-button size color="primary"  [disabled]="isDisabled()" (click)="sendSubscription()">{{ 'MODIFY' | translate }}</ion-button>
+            </ion-row>
+          </ion-grid>
+          <ion-grid no-lines  *ngIf="isDisabled() == true" >
+            <ion-row class="item-period borderrow" lines *ngFor="let date of periods">
+              <!-- Item-subtitle -->
+              <ion-label class="label-subtitle" item-subtitle  *ngIf="date.subscribed == true"><ion-icon name="calendar"></ion-icon> {{ date.label }}</ion-label> 
+              <!-- Item-title -->
+              <ion-label  class="labelperiod" *ngIf="date.subscribed == true">{{ date.start_date | prettydate }} <ion-icon name="arrow-forward"></ion-icon> {{ date.end_date | prettydate }}</ion-label>
+              <ion-label  class="labelperiod ion-text-wrap" *ngIf="date.subscribed == true">
+
+                  <span  *ngIf="date.limit_subscribe" class="sub-period" item-start span-medium><ion-icon  class="margin-icon" name="people" color='primary' item-start></ion-icon>{{ 'SUBSCRIPTIONS' | translate }}</span>
+                  <span *ngIf="date.limit_subscribe" class="sub-period" item-end span-medium small>({{date.subscribers}}/{{date.limit_subscribe}})</span>
+                  <span *ngIf="date.subscribers == date.limit_subscribe" class="sub-period period-full">{{ 'FULL' | translate }}</span>
+              </ion-label>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-grid>
+    </ion-list>
+</ion-col>
+</ion-row>
+</ion-grid>
+</ion-content>

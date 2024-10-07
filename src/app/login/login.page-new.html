@@ -1,0 +1,47 @@
+<ion-content [fullscreen]="true" background-size [ngStyle]="{'background-image': 'url(../../assets/images/background/39.jpg)'}" class="login-content">
+  <ion-buttons class="langselector">
+    <ion-button (click)="changeLanguage()">
+      <ion-icon name="earth-outline"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <!-- Login Page -->
+  <div class="container">
+    <div  class="header-logo-container">
+      <!---Logo-->
+      <div>
+      <img box-shadow item-start margin src="assets/images/logo/1.png" class="login-logo">
+     </div>
+     <div>
+      <!---Logo Subtitle-->
+      <h1 login-subtitle>Faire bouger la communauté!</h1>
+      <!---Logo Title-->
+      <h2 ion-text login-title no-margin text-wrap>Simple comme l'ABC!</h2>
+    </div>
+    </div>
+    <form>
+      <ion-item lines="none" class="ion-item">
+        <fieldset  class="input-item" [ngClass]="{'fieldseterror' : !isUsernameValid}">
+          <legend>{{ 'Email' | translate }}</legend> 
+          <ion-input required type="text" placeholder="{{ 'Email' | translate }}" [(ngModel)]="account.username" name="username" [ngModelOptions]="{standalone: true}"></ion-input>
+          <p  *ngIf="!isUsernameValid">{{'REQUIRED_FIELD' | translate}}</p>
+        </fieldset>
+        
+      </ion-item>
+      <ion-item lines="none" class="ion-item">
+        <fieldset class="input-item" [ngClass]="{'fieldseterror' : !isUsernameValid}">
+          <legend>{{ 'PASSWORD' | translate }}</legend> 
+          <ion-input required type="password" placeholder="{{ 'PASSWORD' | translate }}" [(ngModel)]="account.password" name="password" [ngModelOptions]="{standalone: true}"></ion-input>
+        </fieldset>
+        <ion-label error-field no-margin *ngIf="!isPasswordValid">{{'REQUIRED_FIELD' | translate}}</ion-label>
+      </ion-item>
+      <ion-button class="login-button" expand="block" (click)="doLogin()">{{ 'LOGIN_BUTTON' | translate }}</ion-button>
+    </form>
+    <p class="forget-text"><a (click)="forgotpassword()">{{'FORGOTTEN_PASSWORD' | translate}}</a></p>
+    <p class="signup-text">{{ 'NOACCOUNT' | translate }}  <a (click)="register()">{{ 'SIGNUP' | translate }}</a></p>
+  </div>
+</ion-content>
+<ion-footer color="white">
+  <ion-toolbar>
+    <p class="copyright">Centre ABC</p>
+  </ion-toolbar>
+</ion-footer>

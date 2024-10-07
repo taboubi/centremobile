@@ -1,0 +1,75 @@
+.eventtitle {
+    color: #ffffff;
+    font-size: 20px;
+  }
+  .mastercard {
+    margin-bottom: 0;
+    margin-top: 20px;
+  }
+  .cardheader {
+      background: rgba(0, 0, 0, 0.6);
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+  }
+  .toolbar-background {
+      background-color: #fff!important;
+      border: none !important;
+  }
+  ion-card-header h1 {
+      color: #a40046;
+  }
+  .margin-icon {
+      margin-right: 8px;
+  }
+  .badge-custom {
+      display: inline-block;
+      padding: .25em .4em;
+      font-size: 75%;
+      font-weight: 100;
+      line-height: 1.3;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: baseline;
+      border-radius: .25rem;
+      color: #fff;
+      height: 18px;
+      margin-left: 2px;
+    }
+    .success-badge {
+    background-color: #28a745;
+    }
+    .blue-light-badge {
+    background-color: #17a2b8;
+    }
+    .dark-badge {
+    background-color: #343a40;
+    }
+    .danger-badge {
+    background-color: #dc3545;
+    }
+    .waiting-badge {
+    background-color: #ffc107;
+    }
+    .reloadbutton {
+      margin-right: 10px;
+    }
+    .buttonsreload {
+      justify-content: end;
+    }
+    .slectcontainer {
+      padding-left: 15px;
+    }
+    .stamp {
+      color: #4F7942;
+      font-size: 0.8rem;
+      font-weight: 800;
+      border: 0.15rem solid #4F7942;
+      display: inline-block;
+      padding: 0.15rem 1rem;
+      text-transform: uppercase;
+      border-radius: 1rem;
+      font-family: "Courier";
+      mix-blend-mode: multiply;
+    }

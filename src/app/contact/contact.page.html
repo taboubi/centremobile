@@ -1,0 +1,86 @@
+<ion-header >
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ 'CONTACT' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid >
+    <ion-row>
+      <ion-col>
+          <ion-item>
+              <!--Maps Title-->
+              <h1 padding-left maps-title margin-top margin-bottom text-wrap>Centre d’action bénévole et communautaire Saint-Laurent</h1>
+          </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row align-items-center>
+    <ion-col>
+
+      <ion-list>
+        <ion-item>
+          <h6  text-wrap margin-bottom><ion-icon name="map"></ion-icon>  910, avenue Sainte-Croix<br>
+            Saint-Laurent, Québec<br>
+            H4L 3Y6
+            <a href='https://www.google.ca/maps/place/910+Avenue+Sainte-Croix,+Saint-Laurent,+QC+H4L+3Y6/@45.516031,-73.672814,15z/data=!4m5!3m4!1s0x4cc91841d25d2245:0xc0de0e045a32c4!8m2!3d45.5149408!4d-73.6781764?hl=fr'>
+              Voir sur la carte
+          </a>
+          </h6>
+        </ion-item>
+          <ion-item>
+
+          <h6  text-wrap margin-bottom><ion-icon name="call"></ion-icon>  Tél. :
+
+            <a href='tel:+1-514-744-5511'>
+              514-744-5511
+          </a>
+          </h6>
+        </ion-item>
+        <ion-item>
+          <h6  text-wrap margin-bottom><ion-icon name="call"></ion-icon>  Fax. :
+
+            <a href='tel:+1-514-744-1206'>
+                514-744-1206
+          </a>
+          </h6>
+        </ion-item>
+        
+        <ion-item lines="none">
+          <p>Directrice générale<br>
+            <span color="light" maps-title>Henriette Konté</span> poste 223</p> 
+      </ion-item>
+      
+                              <ion-item lines="none">
+                                  <p>Responsable des communications<br>
+                                    <span color="light" maps-title>Laurence Bouchard</span> poste 224 </p> 
+          </ion-item> 
+               
+          <ion-item lines="none">
+          <p  text-wrap>
+          Reponsable des bénévoles<br>
+          <span color="light" maps-title>Mélanie Massicotte</span> poste 222
+          </p>
+          </ion-item>
+          <ion-item lines="none">
+          <p  text-wrap> 
+          Coordonnatrice des services aux bénévoles et aux bénéficiaires <br>
+          <span color="light" maps-title>Koné Djakaridja</span> poste 226 
+          </p> 
+          </ion-item>
+          
+               
+          <ion-item lines="none">
+          <p  text-wrap> 
+          Heures d'ouverture:<br>
+          Lundi, Mardi, Mercredi, et Vendredi: de 8h à 17h30<br>
+          Jeudi: de 8h à 20h<br>
+          </p> 
+          </ion-item> 
+      </ion-list>
+    </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

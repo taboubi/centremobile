@@ -1,0 +1,77 @@
+<ion-header >
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ 'TRAININGS' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header >
+  </ion-header>
+  <div id="container">
+   <ion-grid no-padding >
+      <ion-row align-items-center *ngIf="emptytrainings === true">
+          <ion-col no-padding col-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6>
+              <h5 class="ion-text-center" ion-text text-center color="light">{{ 'UNVAILABLETRAINING' | translate }}</h5>
+          </ion-col>
+      </ion-row>
+      <ion-row *ngIf="currentItems !== null">
+        <div *ngFor="let item of currentItems">
+          <ion-card text-left box-shadow class="cardevent">
+            <!--Card descriptiom-->
+            <ion-card-header>
+              <h1 card-subtitle>{{item['title']}}</h1>
+            </ion-card-header>
+            <ion-card-content>
+                <!--Card Body Text-->
+                <p card-body-text>{{item['description']}}</p>
+            </ion-card-content>
+            <ion-row>
+              <ion-col class="col" col-6>
+                  <span item-start span-medium><ion-icon name="people" color='primary' class="margin-icon" item-start></ion-icon>{{ 'SUBSCRIPTIONS' | translate }}</span>
+                  <span item-end span-medium small>({{item['subscribers']}}/{{item['limit_subscribe']}})</span>
+              </ion-col>
+              <ion-col class="col" col-6>
+                <span *ngIf="item['subscribers'] == item['limit_subscribe']" class="stamp is-nope">{{ 'FULL' | translate }}</span>
+             </ion-col>
+              
+            </ion-row>
+            <ion-row>
+                <ion-col col-12>
+                   <ion-icon name="calendar" color="primary" class="margin-icon"></ion-icon> {{ 'DATE_TIME' | translate }} 
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                  <ion-row align-items-center  >
+                              <span class="date-event"> 
+                                <ion-icon name="time"></ion-icon>{{ item['start_date'] | prettydate }}
+                              </span>
+                              <ion-icon name="arrow-forward"></ion-icon>
+                              <span class="date-event"> 
+                              {{ item['end_date'] | prettydate }}
+                            </span>
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+            <ion-grid>
+            <ion-row class="ion-justify-content-between ion-align-items-center">
+             <ion-col size="auto" class="ion-text-end ion-float-left"  *ngIf="item['can_subscribe'] === true && item['subscribe_status'] === false" ><ion-button (click)="subscribe(item['id'])" ion-button size="small" color="primary"   item-end icon-start small float-right>
+              {{ 'SUBSCRIBE' | translate }}</ion-button></ion-col>
+             <ion-col *ngIf="item['subscribe_status'] !== false" size="auto" class="display-flex">
+                <span *ngIf="item['subscribe_status'] === 0" class="badge-custom danger-badge display-flex"><ion-icon name="close-circle"></ion-icon>{{  'STATUS_REFUSED' | translate }}</span>
+                <span *ngIf="item['subscribe_status'] === 2" class="badge-custom success-badge display-flex"><ion-icon name="checkmark-circle" color="secondary"></ion-icon>{{  'STATUS_APPROVED' | translate }}</span>
+                <span *ngIf="item['subscribe_status'] === 1" class="badge-custom waiting-badge display-flex"><ion-icon name="ios-timer-outline"></ion-icon>{{  'STATUS_WAITING' | translate }}</span>
+                
+             </ion-col>
+            </ion-row>
+            </ion-grid>
+          </ion-card>
+        </div>
+      </ion-row>
+    </ion-grid>
+  </div>
+  
+</ion-content>

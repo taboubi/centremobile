@@ -1,0 +1,394 @@
+ion-menu ion-content {
+  --background: var(--ion-item-background, var(--ion-background-color, #fff));
+}
+
+ion-menu.md ion-content {
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --padding-top: 20px;
+  --padding-bottom: 20px;
+}
+
+ion-menu.md ion-list-header,
+ion-menu.md ion-note {
+  padding-left: 10px;
+}
+
+ion-menu.md ion-list#inbox-list {
+  border-bottom: 1px solid var(--ion-color-step-150, #d7d8da);
+}
+
+ion-menu.md ion-list#inbox-list ion-list-header {
+  font-size: 22px;
+  font-weight: 600;
+
+  min-height: 20px;
+}
+
+ion-menu ion-note  {
+  position: absolute;
+  left: 45px;
+  top: 10px;
+}
+ion-menu.md ion-list#labels-list ion-list-header {
+  font-size: 16px;
+
+  margin-bottom: 18px;
+
+  color: #757575;
+
+  min-height: 26px;
+}
+ion-menu ion-list-header {
+  margin-bottom: 45px;
+}
+
+ion-menu.md ion-item {
+  --padding-start: 10px;
+  --padding-end: 10px;
+  border-radius: 4px;
+}
+
+ion-menu.md ion-item.selected {
+  --background: rgba(var(--ion-color-primary-rgb), 0.14);
+}
+
+ion-menu.md ion-item.selected ion-icon {
+  color: var(--ion-color-primary);
+}
+
+ion-menu.md ion-item ion-icon {
+  color: #616e7e;
+}
+
+ion-menu.md ion-item ion-label {
+  font-weight: 500;
+}
+
+ion-menu.ios ion-content {
+  --padding-bottom: 20px;
+}
+
+ion-menu.ios ion-list {
+  padding: 20px 0 0 0;
+}
+
+ion-menu.ios ion-note {
+  line-height: 24px;
+}
+
+ion-menu.ios ion-item {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --min-height: 50px;
+}
+
+ion-menu.ios ion-item.selected ion-icon {
+  color: var(--ion-color-primary);
+}
+
+ion-menu.ios ion-item ion-icon {
+  font-size: 24px;
+  color: #73849a;
+}
+
+ion-menu.ios ion-list#labels-list ion-list-header {
+  margin-bottom: 8px;
+}
+
+ion-menu.ios ion-list-header,
+ion-menu.ios ion-note {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+ion-menu.ios ion-note {
+  margin-bottom: 8px;
+}
+
+ion-note {
+  display: inline-block;
+  font-size: 16px;
+
+  color: var(--ion-color-medium-shade);
+}
+
+ion-item.selected {
+  --color: var(--ion-color-primary);
+}
+
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+
+.avatar {
+  border-radius: 5%;
+  width: 50px;
+  height: 50px;
+}
+.menu-bg {
+  display: flex;
+  display: -webkit-flex;
+}
+p.logo-description {
+  display: inline-block;
+  padding-left: 11px;
+  font-size: 1.2rem;
+}
+.item-ios {
+  padding-left: 12px;
+}
+.item-md ion-icon[item-left] + .item-inner,
+.item-md ion-icon[item-left] + .item-input,
+.item-md ion-icon[item-start] + .item-inner,
+.item-md ion-icon[item-start] + .item-input {
+margin-left: 12px;
+}
+
+.fade-in-left-item {
+  -webkit-animation: fadeInLeft 800ms;
+  -moz-animation: fadeInLeft 800ms;
+  -o-animation: fadeInLeft 800ms;
+  animation: fadeInLeft 800ms;
+}
+.card-ios,
+.card-md {
+  background-color: #fff;
+}
+.date-event {
+font-size: 1.2rem;
+}
+.badge-custom {
+  display: inline-block;
+  padding: .25em .4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25rem;
+  color: #fff;
+  height: 18px;
+  margin-left: 2px;
+}
+.success-badge {
+background-color: #28a745;
+}
+.blue-light-badge {
+background-color: #17a2b8;
+}
+.dark-badge {
+background-color: #343a40;
+}
+.danger-badge {
+background-color: #dc3545;
+}
+.waiting-badge {
+background-color: #ffc107;
+}
+.card-content-ios,
+.card-content-md {
+padding: 7px 7px;
+}
+.card-title-md,
+.card-title-ios {
+padding: 0px;
+}
+.cardevent h1 {
+color: #A40046;
+}
+// Settings Card
+ion-card {
+box-shadow: none !important;
+//border-radius: $border-radius !important;
+
+[card-image] {
+  position: relative;
+
+  [title-block] {
+    position: absolute;
+    background: theme-colors('mainColors', 'accentDark', 0.6);
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 15px;
+  }
+}
+
+ion-card-content {
+  overflow: hidden;
+
+  [default-button] {
+    padding: 10px 20px !important;
+    //font-size: $h4-font-size !important;
+    height: auto !important;
+  }
+}
+// Card Description
+[card-subtitle] {
+  margin-bottom: 10px;
+  //color: color($googleCard, card-subtitle-basic) !important;
+}
+
+[card-title] {
+  //color: color($googleCard, card-title-basic) !important;
+  width: 85%;
+}
+
+[card-body-text] {
+ // color: color($googleCard, card-description-basic) !important;
+}
+}
+
+[badge-clear] {
+margin-top: 5px;
+}
+
+[button-action-shit] {
+//color: color($buttonActionShit, color-primary) !important;
+}
+.display-flex {
+display: flex;
+display: -webkit-flex;
+align-items: center;
+}
+.link-edit-event {
+text-decoration: underline;
+cursor: point er;
+}
+.is-nope {
+color: #0A9928 !important;
+border: 0.5rem double #0A9928 !important;
+transform: rotate(3deg);
+-webkit-mask-position: 2rem 3rem;
+font-size: 1.4rem;  
+}
+.stamp {
+transform: rotate(12deg);
+color: #555;
+font-size: 1.4rem;
+font-weight: 700;
+border: 0.25rem solid #555;
+display: inline-block;
+padding: 0.25rem 1rem;
+text-transform: uppercase;
+border-radius: 1rem;
+font-family: 'Courier';
+mix-blend-mode: multiply;
+position: absolute;
+right: 5%;
+top: 120px;
+}
+.card {
+padding-bottom: 7px;
+min-height: 220px;
+}
+.link-edit-event {
+font-size: 2em;
+}
+
+.item-period {
+  border-bottom: 1px solid whitesmoke !important;
+  margin-bottom: 5px !important;
+  .label-subtitle {
+    font-size: 13px !important;
+  }
+}
+.item-period .labelperiod {
+margin: 0 !important;
+padding: 0 !important;
+}
+.noteslogan {
+  font-size: 11px !important;
+  line-height: 16px !important;
+  padding-right: 0 !important;
+}
+.firstmenuitem {
+  margin-top: 20px;
+}
+.menuitem {
+  margin-top: 20px !important;
+}
+.item-period .labelperiod span.sub-period {
+  font-size: 11px !important;
+  color: #a40046;
+  margin-right: 2px !important;
+  margin-left: 2px !important;
+  .icon {
+    margin-top: 5px !important;
+    margin-right: 5px;
+  }
+}
+.period-full {
+color: #0A9928 !important;
+border: 1px solid #0A9928;
+padding: 3px;
+border-radius: 4px;
+}
+ion-header {
+  ion-navbar {
+    .back-button {
+      // color: color($colors, grey);
+    }
+  }
+}
+
+//
+//
+// ------------------------------------
+.pull-right {
+    float: right;
+}
+
+.pull-left {
+    float: left;
+}
+
+
+
+//
+//
+// ------------------------------------
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+
+
+//
+//
+// ------------------------------------
+.hc-toast {
+  .toast-wrapper  {
+    // background-color: color($colors, grey) !important;
+  }
+}
+
+.no-badge {
+  ion-badge {
+    display: none;
+  }
+}
