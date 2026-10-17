@@ -9,7 +9,8 @@
     "build": "ng build && npx cap sync android",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "capacitor:copy:before": "node scripts/inject-firebase-config.js"
   },
   "private": true,
   "dependencies": {

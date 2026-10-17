@@ -66,3 +66,6 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Firebase / FCM push config (injected at build time from Appflow env var)
+android/app/google-services.json
