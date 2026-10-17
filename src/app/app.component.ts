@@ -30,7 +30,7 @@ export class AppComponent {
     private route: ActivatedRoute,
     private router: Router,
     private fcmService: FcmService) {
-      if (Capacitor.platform !== 'web') {
+      if (Capacitor.getPlatform() !== 'web') {
         StatusBar.setBackgroundColor({color: "#A40046"});
         this.fcmService.initPush();
       }

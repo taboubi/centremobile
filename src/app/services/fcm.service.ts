@@ -18,7 +18,7 @@ export class FcmService {
     public StorageService: StorageService) {}
 
   public initPush() {
-    if (Capacitor.platform !== 'web') {
+    if (Capacitor.getPlatform() !== 'web') {
       this.registerPush();
     }
   }
