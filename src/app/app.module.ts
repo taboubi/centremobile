@@ -10,8 +10,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule} from '@ionic/storage-angular';
-import { Drivers, Storage } from '@ionic/storage';
-import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
+import { Drivers } from '@ionic/storage';
 import { StorageService } from 'src/app/storage.service';
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
@@ -34,7 +33,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     }),
     IonicStorageModule.forRoot({
       name: '__centreabc',
-      driverOrder: [CordovaSQLiteDriver._driver, Drivers.IndexedDB]
+      driverOrder: [Drivers.IndexedDB]
     })],
   providers: [
     Api,
